@@ -3,37 +3,35 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hexo</title>
+  <title>CSS布局——两侧定宽中间自适应 | whyang | 但行好事 莫问前程</title>
 
   
   <meta name="author" content="yang">
   
 
   
-  <meta name="description" content="CSS布局——两侧定宽中间自适应标签（空格分隔）： css
-
-1.通过float实现html结构如下所示123&amp;lt;div class=&quot;left&quot;&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;div class=&quot;right&quot;&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;div class=&quot;center&quot;">
+  <meta name="description" content="实现css两侧定宽中间自适应布局有多种方案,可通过浮动,position定位及CSS3中的flex实现,记载如下:">
   
 
   
   
-  <meta name="keywords" content="">
+  <meta name="keywords" content="CSS">
   
 
   <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  
+  <meta property="og:title" content="CSS布局——两侧定宽中间自适应"/>
 
-  <meta property="og:site_name" content="Hexo"/>
+  <meta property="og:site_name" content="whyang"/>
 
   
   <meta property="og:image" content="/favicon.ico"/>
   
 
   <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="alternate" href="/atom.xml" title="whyang" type="application/atom+xml">
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
 </head>
 
@@ -45,16 +43,20 @@
     <header>
   <div class="site-branding">
     <h1 class="site-title">
-      <a href="/">Hexo</a>
+      <a href="/">whyang</a>
     </h1>
-    <p class="site-description"></p>
+    <p class="site-description">但行好事 莫问前程</p>
   </div>
   <nav class="site-navigation">
     <ul>
       
-        <li><a href="/">主页</a></li>
+        <li><a href="/">Home</a></li>
       
-        <li><a href="/archives">归档</a></li>
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/categories">Categories</a></li>
+      
+        <li><a href="/tags">Tags</a></li>
       
     </ul>
   </nav>
@@ -65,14 +67,14 @@
 
   
     
-    <h3 class="article-title"><span></span></h3>
+    <h3 class="article-title"><span>CSS布局——两侧定宽中间自适应</span></h3>
     
   
 
   <div class="article-top-meta">
     <span class="posted-on">
       <a href="/2017/03/19/两侧定宽中间自适应/" rel="bookmark">
-        <time class="entry-date published" datetime="2017-03-19T09:31:51.013Z">
+        <time class="entry-date published" datetime="2017-03-18T16:00:00.000Z">
           2017-03-19
         </time>
       </a>
@@ -85,8 +87,7 @@
   <div class="article-content">
     <div class="entry">
       
-        <h1 id="CSS布局——两侧定宽中间自适应"><a href="#CSS布局——两侧定宽中间自适应" class="headerlink" title="CSS布局——两侧定宽中间自适应"></a>CSS布局——两侧定宽中间自适应</h1><p>标签（空格分隔）： css</p>
-<hr>
+        <p>实现css两侧定宽中间自适应布局有多种方案,可通过浮动,position定位及CSS3中的flex实现,记载如下:<br><a id="more"></a></p>
 <h2 id="1-通过float实现"><a href="#1-通过float实现" class="headerlink" title="1.通过float实现"></a>1.通过float实现</h2><p>html结构如下所示<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"center"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.left</span> &#123;<span class="attribute">float</span>: left; <span class="attribute">width</span>: <span class="number">100px</span>; <span class="attribute">height</span>: <span class="number">300px</span>; <span class="attribute">background-color</span>: <span class="number">#f00</span>;&#125;</div><div class="line"><span class="selector-class">.center</span> &#123;<span class="attribute">height</span>: <span class="number">300px</span>; <span class="attribute">background-color</span>: <span class="number">#ff0</span>;&#125;</div><div class="line"><span class="selector-class">.right</span> &#123;<span class="attribute">float</span>: right; <span class="attribute">width</span>: <span class="number">300px</span>; <span class="attribute">height</span>: <span class="number">300px</span>; <span class="attribute">background-color</span>: <span class="number">#f00</span>;&#125;</div></pre></td></tr></table></figure>
 <p>这种方法实现简单,但是html结构上center要写在right后面,不符合正常逻辑。使用时要稍加注意</p>
@@ -94,7 +95,7 @@
 <figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">body</span> &#123;<span class="attribute">position</span>: relative&#125;</div><div class="line"><span class="selector-class">.left</span>,<span class="selector-class">.right</span> &#123;<span class="attribute">position</span>: absolute; <span class="attribute">top</span>: <span class="number">0</span>; <span class="attribute">width</span>: <span class="number">200px</span>; <span class="attribute">height</span>: <span class="number">200px</span>; <span class="attribute">background-color</span>: <span class="number">#f00</span>&#125;</div><div class="line"><span class="selector-class">.center</span> &#123;<span class="attribute">height</span>: <span class="number">200px</span>; <span class="attribute">background-color</span>: <span class="number">#ff0</span>&#125;</div><div class="line"><span class="selector-class">.left</span> &#123;<span class="attribute">left</span>: <span class="number">0</span>&#125;</div><div class="line"><span class="selector-class">.right</span> &#123;<span class="attribute">right</span>: <span class="number">0</span>&#125;</div></pre></td></tr></table></figure>
 <p>这种方法是将center铺满整个容器,然后将left,right用position定位在<br>左右两边,盖住center,看起来就像自适应一样</p>
 <h2 id="3-通过flex布局实现"><a href="#3-通过flex布局实现" class="headerlink" title="3.通过flex布局实现"></a>3.通过flex布局实现</h2><p>html结构与position方法相同<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.box</span> &#123; <span class="attribute">display</span>: flex;<span class="attribute">flex-direction</span>: row&#125;</div><div class="line"><span class="selector-class">.left</span>,<span class="selector-class">.right</span> &#123;<span class="attribute">width</span>: <span class="number">100px</span>; <span class="attribute">height</span>: <span class="number">200px</span>; <span class="attribute">background-color</span>: <span class="number">#f00</span>;&#125;</div><div class="line"><span class="selector-class">.center</span> &#123;<span class="attribute">flex-grow</span>: <span class="number">1</span>; <span class="attribute">background-color</span>: <span class="number">#ff0</span>&#125;</div></pre></td></tr></table></figure></p>
-<p>css3中的flex弹性布局,先将父容器的display设为flex布局,再通过flex-direction: row将其中的布局方向设为横向排列,然后在需要自适应的子元素中定义flex-grow属性,此属性接受一个数字,表示这个子元素占父元素剩余空间的比例,利用这个属性可实现两侧定宽中间多列自适应, 美中不足的是存在浏览器兼容问题。相信在不远的未来大家都能告别IE用如此方便的属性来实现css布局.</p>
+<p>css3中的flex弹性布局,先将父容器的display设为flex布局,再通过flex-direction: row将其中的布局方向设为横向排列,然后在需要自适应的子元素中定义flex-grow属性,此属性接受一个数字,表示这个子元素占父元素剩余空间的比例,利用这个属性可实现两侧定宽中间多列自适应, 美中不足的是存在浏览器兼容问题。相信在不远的未来大家都能告别IE,用如此方便的属性来实现css布局.</p>
 
       
     </div>
@@ -105,7 +106,21 @@
     <div class="article-meta pull-left">
 
     
+      
 
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/个人总结/">个人总结</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/CSS/">CSS</a>
+    </span>
     
 
     </div>
@@ -113,9 +128,6 @@
     
   </div>
 </article>
-
-  
-
 
 
     </main>
