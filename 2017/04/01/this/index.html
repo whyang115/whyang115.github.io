@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>this | whyang | 但行好事 莫问前程</title>
+
+  
+  <meta name="author" content="yang">
+  
+
+  
+  <meta name="description" content="在学习js的过程中,this这个关键字是大家都绕不开的话题,个人理解中this是指函数运行过程中自动生成的一个变量,指向此对象的一个引用,下面通过四种情况讨论">
+  
+
+  
+  
+  <meta name="keywords" content="js">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="this"/>
+
+  <meta property="og:site_name" content="whyang"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="whyang" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">whyang</a>
+    </h1>
+    <p class="site-description">但行好事 莫问前程</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>this</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/04/01/this/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-04-01T04:24:14.435Z">
+          2017-04-01
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>在学习js的过程中,this这个关键字是大家都绕不开的话题,个人理解中this是指函数运行过程中自动生成的一个变量,指向此对象的一个引用,下面通过四种情况讨论<br><a id="more"></a></p>
+<p>##当this在最外层作用域或全局函数中调用时<br>当在最外层作用域或全局函数调用时,this的值为全局变量(在浏览器中为window,在nodejs中为global),在<code>strict</code>模式下为undefined<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(<span class="keyword">this</span>)<span class="comment">//window</span></div><div class="line"><span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>) <span class="comment">//window</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>##当this在一个被调用的方法中时<br>当以一个方法被调用,this的值取决于调用这个方法的对象<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> age = <span class="number">23</span>;</div><div class="line"><span class="keyword">var</span> me = &#123;</div><div class="line">  <span class="attr">age</span>: <span class="number">21</span>,</div><div class="line">  <span class="attr">old</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.age) <span class="comment">//21</span></div><div class="line">  &#125;</div><div class="line">  a: &#123;</div><div class="line">    <span class="attr">age</span>: <span class="number">25</span>,</div><div class="line">    <span class="attr">b</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.age);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> f = me.old;</div><div class="line">f();<span class="comment">//23</span></div></pre></td></tr></table></figure></p>
+<p>当函数被对象当作方法调用时this指向调用函数的这个对象<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> me =&#123;</div><div class="line">  <span class="attr">age</span>: <span class="number">21</span>,</div><div class="line">  <span class="attr">a</span>: &#123;</div><div class="line">    <span class="attr">b</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.age);<span class="comment">//undefined</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>me.a.b()的返回值为undefined,说明this的取值取决于调用这个函数的对象的的上一级对象<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> age = <span class="number">23</span>;</div><div class="line"><span class="keyword">var</span> me = &#123;</div><div class="line">  <span class="attr">age</span>: <span class="number">21</span>,</div><div class="line">  <span class="attr">old</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.age);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> f = me.old;</div><div class="line">f() <span class="comment">//23</span></div></pre></td></tr></table></figure></p>
+<p>f()的取值为23,说明this的取值取决于函数被调用的时刻而不是函数被定义的时刻</p>
+<h2 id="通过new操作符调用"><a href="#通过new操作符调用" class="headerlink" title="通过new操作符调用"></a>通过new操作符调用</h2><p>当一个函数被new操作符调用时,即将此函数作为构造函数调用,此函数的this自动指向new出的对象<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">this</span>.age = <span class="number">21</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> me = <span class="keyword">new</span> Person() ;</div><div class="line"><span class="built_in">console</span>.log(me.age); <span class="comment">// 21</span></div></pre></td></tr></table></figure></p>
+<p>有一个意外就是当构造函数返回的是一个对象时,则new出的对象就是这个返回的对象,this也就指向这个对象<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">this</span>.age = <span class="number">21</span>;</div><div class="line">  <span class="keyword">return</span> &#123;</div><div class="line">    <span class="attr">age</span>: <span class="number">20</span></div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> me = <span class="keyword">new</span> Person();</div><div class="line"><span class="built_in">console</span>.log(me.age); <span class="comment">//20</span></div></pre></td></tr></table></figure></p>
+<h2 id="当方法通过call、apply调用时"><a href="#当方法通过call、apply调用时" class="headerlink" title="当方法通过call、apply调用时"></a>当方法通过call、apply调用时</h2><p>call、apply是Function原型上的一组方法,可强行改变this的值为所传入的第一个参数,call与apply的区别在于所传入的参数,前者为一个一个的参数,后者为一个参数数组<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> me = &#123;</div><div class="line">  <span class="attr">age</span>: <span class="number">21</span>,</div><div class="line">  <span class="attr">old</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.age);</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> other = &#123;<span class="attr">age</span>: <span class="number">25</span>&#125;;</div><div class="line">me.age.call(other);<span class="comment">//25</span></div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/笔记总结/">笔记总结</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/js/">js</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+	<section id="comments" class="comment">
+	  <div id="disqus_thread">
+	  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	  </div>
+	</section>
+
+	<script type="text/javascript">
+	var disqus_shortname = 'https://whyang115.github.io/';
+	(function(){
+	  var dsq = document.createElement('script');
+	  dsq.type = 'text/javascript';
+	  dsq.async = true;
+	  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	}());
+	(function(){
+	  var dsq = document.createElement('script');
+	  dsq.type = 'text/javascript';
+	  dsq.async = true;
+	  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	}());
+	</script>
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2017 yang
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>
