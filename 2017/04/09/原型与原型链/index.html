@@ -1,0 +1,172 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>原型与原型链 | whyang | 但行好事 莫问前程</title>
+
+  
+  <meta name="author" content="yang">
+  
+
+  
+  <meta name="description" content="js的学习中,原型与原形链是非常重要的部分,是实现对象继承和面向对象编程的基础">
+  
+
+  
+  
+  <meta name="keywords" content="js">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="原型与原型链"/>
+
+  <meta property="og:site_name" content="whyang"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="whyang" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">whyang</a>
+    </h1>
+    <p class="site-description">但行好事 莫问前程</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>原型与原型链</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/04/09/原型与原型链/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-04-09T05:42:26.559Z">
+          2017-04-09
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>js的学习中,原型与原形链是非常重要的部分,是实现对象继承和面向对象编程的基础<br><a id="more"></a></p>
+<h2 id="原型-prototype"><a href="#原型-prototype" class="headerlink" title="原型(prototype)"></a>原型(prototype)</h2><p>原型每一个对象都拥有的属性,它是一个链接到其父对象的引用,他们相互链接形成一个链,向上直到null为止<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = &#123;&#125;</div><div class="line">a.constructor === <span class="built_in">Object</span> <span class="comment">//true</span></div><div class="line">a.__proto__ === <span class="built_in">Object</span>.prototype</div></pre></td></tr></table></figure></p>
+<p>prototype是只有函数才有的属性,当创建一个构造函数时,会自动创建一个prototype属性且为空,当用new去调用这个构造函数时就返回一个对象并将这个对象的原型指向构造函数的prototype属性,这个对象也有一个constructor属性指向构造函数<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">age</span>) </span>&#123;</div><div class="line">  <span class="keyword">this</span>.age = age;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person(<span class="number">20</span>);</div><div class="line"></div><div class="line">person.__proto__ === Person.prototype;<span class="comment">//true</span></div><div class="line">Person.prototype.isProtypeOf(person); <span class="comment">//true</span></div><div class="line">person.constructor === Person<span class="comment">//true</span></div><div class="line">Person.prototype.constructor === Person <span class="comment">//true</span></div></pre></td></tr></table></figure></p>
+<p>上述关系可以用一幅个人制作的丑图表示,网络上还有更为复杂全面的图。<br><img src="http://onlzci6oa.bkt.clouddn.com/17-4-9/52237926-file_1491720362859_1777a.png" alt=""></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/笔记总结/">笔记总结</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/js/">js</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+	<section id="comments" class="comment">
+	  <div id="disqus_thread">
+	  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	  </div>
+	</section>
+
+	<script type="text/javascript">
+	var disqus_shortname = 'https://whyang115.github.io/';
+	(function(){
+	  var dsq = document.createElement('script');
+	  dsq.type = 'text/javascript';
+	  dsq.async = true;
+	  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	}());
+	(function(){
+	  var dsq = document.createElement('script');
+	  dsq.type = 'text/javascript';
+	  dsq.async = true;
+	  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	}());
+	</script>
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2017 yang
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>
