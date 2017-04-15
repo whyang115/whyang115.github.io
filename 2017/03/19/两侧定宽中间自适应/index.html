@@ -10,7 +10,7 @@
   
 
   
-  <meta name="description" content="实现css两侧定宽中间自适应布局有多种方案,可通过浮动,position定位及CSS3中的flex实现,记载如下:">
+  <meta name="description" content="实现css两侧定宽中间自适应布局有多种方案,可通过浮动,position定位及CSS3中的flex实现,记录如下:">
   
 
   
@@ -87,7 +87,7 @@
   <div class="article-content">
     <div class="entry">
       
-        <p>实现css两侧定宽中间自适应布局有多种方案,可通过浮动,position定位及CSS3中的flex实现,记载如下:<br><a id="more"></a></p>
+        <p>实现css两侧定宽中间自适应布局有多种方案,可通过浮动,position定位及CSS3中的flex实现,记录如下:<br><a id="more"></a></p>
 <h2 id="1-通过float实现"><a href="#1-通过float实现" class="headerlink" title="1.通过float实现"></a>1.通过float实现</h2><p>html结构如下所示<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"center"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.left</span> &#123;<span class="attribute">float</span>: left; <span class="attribute">width</span>: <span class="number">100px</span>; <span class="attribute">height</span>: <span class="number">300px</span>; <span class="attribute">background-color</span>: <span class="number">#f00</span>;&#125;</div><div class="line"><span class="selector-class">.center</span> &#123;<span class="attribute">height</span>: <span class="number">300px</span>; <span class="attribute">background-color</span>: <span class="number">#ff0</span>;&#125;</div><div class="line"><span class="selector-class">.right</span> &#123;<span class="attribute">float</span>: right; <span class="attribute">width</span>: <span class="number">300px</span>; <span class="attribute">height</span>: <span class="number">300px</span>; <span class="attribute">background-color</span>: <span class="number">#f00</span>;&#125;</div></pre></td></tr></table></figure>
 <p>这种方法实现简单,但是html结构上center要写在right后面,不符合正常逻辑。使用时要稍加注意</p>

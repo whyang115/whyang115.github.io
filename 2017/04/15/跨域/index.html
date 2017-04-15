@@ -1,0 +1,213 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>跨域 | whyang | 但行好事 莫问前程</title>
+
+  
+  <meta name="author" content="yang">
+  
+
+  
+  <meta name="description" content="浏览器在访问其他域的资源时会因为同源策略的影响而失败,这便是跨域问题,针对跨域问题也有很多不同的方案各有其使用场景">
+  
+
+  
+  
+  <meta name="keywords" content="js">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="跨域"/>
+
+  <meta property="og:site_name" content="whyang"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="whyang" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">whyang</a>
+    </h1>
+    <p class="site-description">但行好事 莫问前程</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>跨域</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/04/15/跨域/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-04-14T16:00:00.000Z">
+          2017-04-15
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>浏览器在访问其他域的资源时会因为同源策略的影响而失败,这便是跨域问题,针对跨域问题也有很多不同的方案各有其使用场景<br><a id="more"></a></p>
+<h2 id="什么是跨域"><a href="#什么是跨域" class="headerlink" title="什么是跨域"></a>什么是跨域</h2><p>浏览器为了安全起见引入了 <strong>同源策略</strong> 来提高安全性,所谓同源策略即同域名、同端口、同协议的才能互相获取资源,具体限制由下图示</p>
+<p><img src="http://onlzci6oa.bkt.clouddn.com/17-4-15/61844366-file_1492244126772_bda5.png" alt="来自网络">;</p>
+<h2 id="几种js实现跨域的方式"><a href="#几种js实现跨域的方式" class="headerlink" title="几种js实现跨域的方式"></a>几种js实现跨域的方式</h2><p>这里说的跨域是指利用浏览器的特性进行hack处理,避开同源策略的限制,后端实现不予讨论</p>
+<h3 id="document-domain-方式实现跨域"><a href="#document-domain-方式实现跨域" class="headerlink" title="document.domain 方式实现跨域"></a>document.domain 方式实现跨域</h3><p>一般一个大型网站都会使用多个子域名,而浏览器的同源策略限制对这种情况有写苛刻,例如百度地图(<code>map.baidu.com</code>)想获得百度阅读(<code>yuedu.baidu.com</code>)的数据<br>如果基础域名相同、协议和端口也相同,便可以通过基础域名的方式来通信<br><code>map.baidu.com</code>中设置<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">document</span>.domain = <span class="string">'baidu.com'</span>;</div></pre></td></tr></table></figure></p>
+<p><code>yuedu.baidu.com</code>中设置<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">  <span class="built_in">document</span>.domain = <span class="string">`baidu.com`</span>;</div><div class="line">  <span class="keyword">var</span> iframe = <span class="built_in">document</span>.createElement(<span class="string">'iframe'</span>);</div><div class="line">  iframe.src= <span class="string">'http://map.baidu.com'</span>;</div><div class="line">  iframe.style.display = <span class="string">"none"</span>;</div><div class="line">  <span class="built_in">document</span>.body.appendChild(iframe);</div><div class="line">  iframe.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> targetDocument = iframe.contentDocument || iframe.contentWindow.document;</div><div class="line">  <span class="comment">//在这里操作map.baidu.com中的数据</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="window-name"><a href="#window-name" class="headerlink" title="window.name"></a>window.name</h3><p>window.name这个全局属性主要是用来获取和设置窗口名称的,但是结合iframe也可以实现跨域,因为每个iframe都有外层包裹它的window对象,而这个window是最外层的对象,所以window.name属性可以共享<br>仍以百度地图(<code>map.baidu.com</code>)和百度阅读(<code>yuedu.baidu.com</code>)为例,百度地图要想获取百度阅读的数据<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> iframe = <span class="built_in">document</span>.createElement(<span class="string">'iframe'</span>);</div><div class="line">iframe.style.display = <span class="string">'none'</span>;</div><div class="line"><span class="built_in">document</span>.body.appendChild(iframe);</div><div class="line"><span class="keyword">var</span> isLoad = <span class="literal">false</span>;</div><div class="line">iframe.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span>(isLoad) &#123;</div><div class="line">    <span class="comment">//解析获得的window.name</span></div><div class="line">    <span class="keyword">var</span> data = <span class="built_in">JSON</span>.parse(iframe.contentWindow.name);</div><div class="line">    iframe.contentWindow.document.write(<span class="string">''</span>);</div><div class="line">    iframe.contentWindow.close();</div><div class="line">    <span class="built_in">document</span>.body.removeChild(iframe);</div><div class="line">  &#125;<span class="keyword">else</span> &#123;</div><div class="line">    <span class="comment">//重定向至yuedu.baidu.com取得window.name属性</span></div><div class="line">    iframe.contentWindow.location = <span class="string">'http://yuedu.baidu.com/getdata.html'</span>;</div><div class="line">    isLoad = <span class="literal">true</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>yuedu.com/getdata.html中需要传送的数据需要存储在window.name中<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var data = &#123;msg: 'I'm message'&#125;;</div><div class="line">window.name = JSON.stringify(data); //window.name属性只支持字符串,在此将其序列化为字符串,后续再使用parse方法解析</div></pre></td></tr></table></figure></p>
+<h3 id="window-postMessage实现跨域"><a href="#window-postMessage实现跨域" class="headerlink" title="window.postMessage实现跨域"></a>window.postMessage实现跨域</h3><p><code>postMessage</code>是HTML5新增在window对象上的方法,可以解决父子页面通信的问题,<code>postMessage</code>方法接受两个参数: </p>
+<ol>
+<li>message: 要传递的信息对象,只支持字符串形式</li>
+<li>targetOrigin: 目标域<br>一个例子,新建一个index.html:<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"sendMsg"</span>&gt;</span>发送信息<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">id</span>=<span class="string">"receiveMsg"</span> <span class="attr">src</span>=<span class="string">"http://b.html"</span>&gt;</span>接收信息<span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> receiveMsg = <span class="built_in">document</span>.getElementById(<span class="string">'receiveMsg'</span>).contentWindow;</div><div class="line">  <span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">"sendMsg"</span>);</div><div class="line">  btn.addEventListenter(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">    e.preventDefault();</div><div class="line">    receiveMsg.postMessage(<span class="string">"I'm message"</span>, <span class="string">'http://b.html'</span>);</div><div class="line">  &#125;,<span class="literal">false</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在iframe指向的页面中监听<code>message</code>事件,这个事件对象有三个重要属性e.data(接收的信息)、e.source(发送信息的窗口对象)、e.origin(发送信息的源页面);</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.onload =<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="built_in">window</span>.addEventListener(<span class="string">'message'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="comment">//验证发送信息的源</span></div><div class="line">    <span class="keyword">if</span>(e.origin !== <span class="string">"http://xxxxx"</span>) &#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'页面来源不正确'</span>);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      alert(e.data);</div><div class="line">    &#125;</div><div class="line">  &#125;,<span class="literal">false</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="jsonp实现跨域"><a href="#jsonp实现跨域" class="headerlink" title="jsonp实现跨域"></a>jsonp实现跨域</h3><p>由于同源策略不会阻止动态脚本的插入,由此衍生出了一种很常用的跨域方式: JSONP(JOSN with Padding)即JSON填充,意为在数据中填充上回调函数<br>原理: 假设我们在源页面a.com想获取b.com的数据,我们可以在a页面中书写以下代码来动态插入来自b.com的脚本:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">show</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(data);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</div><div class="line">script.src= <span class="string">"http://www.b.com/getdata?callback=show"</span>;</div><div class="line"><span class="built_in">document</span>.body.appendChild(script);</div></pre></td></tr></table></figure></p>
+<p>利用动态脚本的src属性,发送了一个<code>http://www.b.com/getdata?callback=show</code>的GET请求,b.com页面接收的这个请求时若不支持JSONP,会正常返回一个数据,假设为<code>{msg: &#39;I&#39;m message&#39;}</code>,而通过JSONP,b.com会接受这个callback参数,利用这个参数值包装返回的数据<code>show({msg: &#39;I&#39;m message&#39;})</code>,而a.com正好有一个show函数,如此一来,当远程数据返回时,这个show函数即会自动执行;<br>JQuery中也有封装好的JSONP函数,使用<code>$.getJSON</code>方法来请求跨域数据<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//callback后函数名可省略,会由jquery自动生成</span></div><div class="line">$.getJSON(<span class="string">'http://www.b.com/getdata?callback=?'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(data);</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>还可利用jquery中的<code>$.ajax</code>方法,只需要指定<code>dataType</code>为<code>jsonp</code>即可<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$.ajax(&#123;</div><div class="line">  <span class="attr">url</span>: <span class="string">'http://www.b.com/getdata?callback=?'</span>,</div><div class="line">  <span class="attr">dataType</span>: <span class="string">'jsonp'</span>,</div><div class="line">  <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(data);</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>JSONP方式虽然因为兼容性较好的得以在低版本浏览器中用途广泛,但由于其自身的局限性,它只支持GET请求,对要求安全性的跨域需要谨慎使用,另外他没有错误处理机制,一旦发生错误,浏览器会以静默失败的方式处理。在现代浏览器中可以使用CORS方法</p>
+<h3 id="CORS方法"><a href="#CORS方法" class="headerlink" title="CORS方法"></a>CORS方法</h3><p><strong>跨域资源共享(Cross-origin resource sharing)</strong> w3c制定的一个标准用来在现代浏览器中实现跨域请求<br>CORS的主要原理是通过一系列的HTTP头信息来实现服务器和客户端的通信,所以要实现CORS,需要对服务器端和客户端都做好相应的配置<br>在CORS标准中请求分为两类: 简单请求和非简单请求</p>
+<h4 id="简单请求"><a href="#简单请求" class="headerlink" title="简单请求"></a>简单请求</h4><p>满足以下条件为简单请求:</p>
+<ol>
+<li>请求方法为: GET、HEAD、POST</li>
+<li>对于请求头字段有严格要求,一般情况下不会超出以下字段:<ul>
+<li>Accept</li>
+<li>Accept-Language</li>
+<li>Content-Language</li>
+<li>Content-Type<br>3.当发起POST请求时,只允许<code>Content-Type</code>为<code>application/x-www-form-urlencoded</code>,<code>multipart/form-data</code>,<code>text/plain</code></li>
+</ul>
+</li>
+</ol>
+<p>简单请求中服务器和客户端之间的通信只是进行简单的交换,如图:</p>
+<p><img src="http://onlzci6oa.bkt.clouddn.com/17-4-15/44918964-file_1492248618826_6ad6.png" alt=""></p>
+<p>浏览器发送一个带有<code>Origin</code>字段的HTTP请求头,用于表明请求来源。服务器的<code>Access-Control-Allow-Origin</code>响应头表明服务器允许哪些源得的访问,<code>*</code>表示任意源.</p>
+<h4 id="非简单请求"><a href="#非简单请求" class="headerlink" title="非简单请求"></a>非简单请求</h4><p>对于非简单请求,在正式发送请求数据之前,浏览器会先发送一个带有<code>OPTIONS</code>方法的请求来确保该请求是安全的,这个请求又被称为‘预请求’(preflight)<br>浏览器与服务器间的通信如图示:<br><img src="http://onlzci6oa.bkt.clouddn.com/17-4-15/99289829-file_1492248621770_15a8e.png" alt=""></p>
+<p>浏览器会在预请求中多发送两个字段<code>Access-Control-Request-Method</code>和<code>Access-Control-Request-Headers</code>,前者用于告知服务器实际请求所用的方法,后者用于告知服务器实际请求所携带的自定义请求首部字段,然后，服务器根据请求头的信息来判断是否允许该请求<br>对于非简单请求,服务器端可以设置几个相关字段:</p>
+<ol>
+<li><code>Access-Control-Allow-Methods</code>: 用来限制允许的方法名</li>
+<li><code>Access-Control-Allow-Header</code>: 用来限制允许的自定义字段名</li>
+<li><code>Access-Control-Allow-Credentials</code>: 用来表明服务器是否允许credentials标志为true的场景</li>
+<li><code>Access-Control-Max-Age</code>: 用来表明预请求响应的有效时间</li>
+<li><code>Access-Control-Expose-Headers</code>: 用来指定服务器端允许的首部字段集合</li>
+</ol>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/笔记总结/">笔记总结</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/js/">js</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+	<section id="comments" class="comment">
+	  <div id="disqus_thread">
+	  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	  </div>
+	</section>
+
+	<script type="text/javascript">
+	var disqus_shortname = 'https://whyang115.github.io/';
+	(function(){
+	  var dsq = document.createElement('script');
+	  dsq.type = 'text/javascript';
+	  dsq.async = true;
+	  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	}());
+	(function(){
+	  var dsq = document.createElement('script');
+	  dsq.type = 'text/javascript';
+	  dsq.async = true;
+	  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	}());
+	</script>
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2017 yang
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>
