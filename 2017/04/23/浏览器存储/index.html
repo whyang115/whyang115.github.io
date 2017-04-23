@@ -1,0 +1,180 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>浏览器存储 | whyang | 但行好事 莫问前程</title>
+
+  
+  <meta name="author" content="yang">
+  
+
+  
+  <meta name="description" content="有的时候需要将数据保存在浏览器端,这样做的好处是当下次访问页面时,不需要再次向服务器请求数据,直接可以从本地读取数据,浏览器存储有以下几种方案cookie,localStorage,sessionStorage">
+  
+
+  
+  
+  <meta name="keywords" content="js">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="浏览器存储"/>
+
+  <meta property="og:site_name" content="whyang"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="whyang" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">whyang</a>
+    </h1>
+    <p class="site-description">但行好事 莫问前程</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>浏览器存储</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/04/23/浏览器存储/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-04-22T16:00:00.000Z">
+          2017-04-23
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>有的时候需要将数据保存在浏览器端,这样做的好处是当下次访问页面时,不需要再次向服务器请求数据,直接可以从本地读取数据,浏览器存储有以下几种方案cookie,localStorage,sessionStorage<br><a id="more"></a></p>
+<h2 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h2><p>cookie是浏览器储存在用户电脑上的一小段文本文件,<code>cookie</code>是纯文本格式,每次发送<code>http</code>请求时都会附带上<code>cookie</code>这段信息发送至服务器,服务器可借此信息识别不同的用户,许多需要登录的网站在用户验证成功后都设置一个<code>cookie</code>,用户就可以凭借此<code>cookie</code>自由浏览这个网站的任意界面</p>
+<h3 id="创建和设置cookie"><a href="#创建和设置cookie" class="headerlink" title="创建和设置cookie"></a>创建和设置cookie</h3><p>服务器端通过发送一个<code>Set-Cookie</code>的<code>http</code>消息头来创建一个<code>cookie</code>,<code>Set-Cookie</code>是一个字符串,格式如下(中括号内为可选项)<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Set-Cookie: value[<span class="string">; expires=date</span>][<span class="symbol">; domain=domain</span>][<span class="string">; path=path</span>][<span class="symbol">; secure</span>]</div></pre></td></tr></table></figure></p>
+<ul>
+<li>value部分通常为一个<code>key=value</code>字符串,value后面的每个选项都以分好和空格分隔开,每个选项都指定了<code>cookie</code>在什么情况下应该发送至服务器</li>
+<li>expires指定过期时间,该选项的值是一个<code>Wdy,day-Month-year hh:mm:ss GMT</code>日期格式,如果这个日期是一个过去的时间点,此<code>cookie</code>会被立即删除</li>
+<li>domain指定<code>cookie</code>要被发送的哪个或哪些域中,默认发送至创建此<code>cookie</code>的域,可手动追加</li>
+<li>path选项指定请求的资源<code>url</code>中必须存在指定路径时才会发送,只有当<code>domain</code>核实后才会比较<code>path</code></li>
+<li>secure 这是一个标记没有值,当一个<code>cookie</code>中包含<code>secure</code>标识时,则只有一个请求通过<code>SSL</code>或<code>Https</code>创建时,这个<code>cookie</code>才能随请求一起被发送至服务器<h3 id="cookie限制条件"><a href="#cookie限制条件" class="headerlink" title="cookie限制条件"></a>cookie限制条件</h3>为了防止cookie滥用并保护浏览器和服务器,cookie有大小的限制条件,每个cookie的大小不能超过4KB,所有超过该大小的cookie都会被截断且不会发送至服务器<h3 id="js操作-cookie"><a href="#js操作-cookie" class="headerlink" title="js操作 cookie"></a>js操作 cookie</h3>在js中可以通过<code>document.cookie</code>创建、读取、设置和删除cookie<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> cookie = <span class="built_in">document</span>.cookie;<span class="comment">//获取cookie</span></div><div class="line">cookie = <span class="string">"name=yang; age=20"</span>;<span class="comment">//创建和设置cookie</span></div><div class="line"><span class="keyword">let</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>();</div><div class="line">cookie += (now.toGMTString());<span class="comment">//删除cookie 设置cookie的过期时间为当前时间,即expires为0</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="localStorage-sessionStorage"><a href="#localStorage-sessionStorage" class="headerlink" title="localStorage,sessionStorage"></a><code>localStorage</code>,<code>sessionStorage</code></h2><p>html5提出了本地存储新规范,即<code>localStorage</code>和<code>sessionStorage</code>,这两种本地存储相比<code>cookie</code>的优点是不会每次随http请求发送,且存储容量较大,在2.5MB-10MB之间(随浏览器不同而不同),<code>sessionStorage</code>和<code>localStorage</code>的相同之处在于不同页面可以共同访问到所存储的数据,区别在于前者为会话存储当浏览器关闭后,所存储的数据也会随之删除,而<code>localStorage</code>存储的数据则会一直存在直到手动删除<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">localStorage.setItem(<span class="string">'name'</span>,<span class="string">'yang'</span>);<span class="comment">//存入数据</span></div><div class="line">localStorage.getItem(<span class="string">'name'</span>);<span class="comment">//读取数据</span></div><div class="line">localStorage.removeItem(<span class="string">'name'</span>);<span class="comment">//删除数据</span></div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/笔记总结/">笔记总结</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/js/">js</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+	<section id="comments" class="comment">
+	  <div id="disqus_thread">
+	  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	  </div>
+	</section>
+
+	<script type="text/javascript">
+	var disqus_shortname = 'https://whyang115.github.io/';
+	(function(){
+	  var dsq = document.createElement('script');
+	  dsq.type = 'text/javascript';
+	  dsq.async = true;
+	  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	}());
+	(function(){
+	  var dsq = document.createElement('script');
+	  dsq.type = 'text/javascript';
+	  dsq.async = true;
+	  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	}());
+	</script>
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2017 yang
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>
