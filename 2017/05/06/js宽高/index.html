@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="js," />
 
 
 
@@ -90,12 +90,16 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="whyang">
-<meta property="og:url" content="https://whyang115.github.io/archives/page/3/index.html">
+<meta name="description" content="js学习中经常遇到关于宽高的问题,最后发现各种宽高其实都是Window、Element、mouseEvent三者的属性,总结一下以便不时查阅">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js中宽高总结">
+<meta property="og:url" content="https://whyang115.github.io/2017/05/06/js宽高/index.html">
 <meta property="og:site_name" content="whyang">
+<meta property="og:description" content="js学习中经常遇到关于宽高的问题,最后发现各种宽高其实都是Window、Element、mouseEvent三者的属性,总结一下以便不时查阅">
+<meta property="og:updated_time" content="2017-05-06T08:26:44.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="whyang">
+<meta name="twitter:title" content="js中宽高总结">
+<meta name="twitter:description" content="js学习中经常遇到关于宽高的问题,最后发现各种宽高其实都是Window、Element、mouseEvent三者的属性,总结一下以便不时查阅">
 
 
 
@@ -123,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="https://whyang115.github.io/archives/page/3/"/>
+  <link rel="canonical" href="https://whyang115.github.io/2017/05/06/js宽高/"/>
 
 
 
 
 
-  <title>归档 | whyang</title>
+  <title>js中宽高总结 | whyang</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -164,7 +168,7 @@
     
   
 
-  <div class="container sidebar-position-left  page-archive  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -248,107 +252,208 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      嗯..! 目前共计 8 篇日志。 继续努力。
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://whyang115.github.io/2017/05/06/js宽高/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="whyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://onlzci6oa.bkt.clouddn.com/17-5-6/33331647-file_1494037395631_a205.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="whyang">
     </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">js中宽高总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-06T12:10:35+08:00">
+                2017-05-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/笔记总结/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记总结</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/05/06/js宽高/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
 
       
       
-      
 
+      
+        <p>js学习中经常遇到关于宽高的问题,最后发现各种宽高其实都是<code>Window</code>、<code>Element</code>、<code>mouseEvent</code>三者的属性,总结一下以便不时查阅<br><a id="more"></a></p>
+<h2 id="Window属性"><a href="#Window属性" class="headerlink" title="Window属性"></a>Window属性</h2><ul>
+<li><code>innerWidth/innerHeight</code>: 浏览器可视窗口的宽度/高度(只读属性) </li>
+<li><code>outerWidth/outerHeight</code>: 整个浏览器(包括导航栏、工具条)的宽度/高度(只读属性)</li>
+<li><code>screenLeft/screenTop || screenX/screenY</code>: 浏览器左/上边界距操作系统左/上边界的距离</li>
+<li><code>scrollX/scrollY || pageXOffset/pageYOffset</code>: 页面水平/垂直滚动的像素值</li>
+</ul>
+<h2 id="Element属性"><a href="#Element属性" class="headerlink" title="Element属性"></a>Element属性</h2><ul>
+<li><code>offsetWidth/offsetHeight</code>: 此元素的宽/高度(含padding、边框)</li>
+<li><code>offsetLeft/offsetTop</code>: 距离浏览器左/上边界的宽度</li>
+<li><code>scrollWidth/scrollHeight</code>: 此元素的宽/高(含padding) + 水平/垂直滚动条滚动的距离</li>
+</ul>
+<p><code>scrollWidth/scrollHeight = clientWidth/clientHeight + scrollLeft/scrollTop</code>;</p>
+<ul>
+<li><code>scrollLeft/scrollTop</code>: 元素的滚动条到元素的左/上边界的距离</li>
+<li><code>clientWidth/clientHeight</code>: 此元素的宽/高(含padding)</li>
+<li><code>clientLeft/clientTop</code>: 元素的左/上边框宽度</li>
+</ul>
+<p>滚动条的宽度: <code>chrome</code>,<code>ie</code>: 17px,<code>opera</code>: 15px; <code>edge</code>: 12px,</p>
+<h2 id="mouseEvent属性"><a href="#mouseEvent属性" class="headerlink" title="mouseEvent属性"></a>mouseEvent属性</h2><ul>
+<li><code>pageX/pageY</code>: 鼠标在当前页面的坐标位置(以页面左上角为0,0起点)</li>
+<li><code>clientX/clientY</code>: 鼠标在此浏览器窗口的坐标位置(以当前浏览器左上角为0,0起点)</li>
+</ul>
+<p><code>pageX/pageY = clientX + scrollX / clientY + scrollY</code>;</p>
+<ul>
+<li><code>screenX/screenY</code>: 鼠标距离屏幕左/上边界的距离</li>
+<li><code>movementX/movementY</code>: 此次鼠标落点于上一次鼠标落点的水平/垂直差值</li>
+</ul>
+<p><code>movementX/movementY = current.screenX - previous.screenX / current.screenY - previous.screenY</code>;</p>
+
+      
+    </div>
+
+    <div>
       
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2017">2017</h2>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/" rel="tag"># js</a>
+          
         </div>
       
+
+      
+        
       
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/29/js继承/" rel="next" title="javascript继承">
+                <i class="fa fa-chevron-left"></i> javascript继承
+              </a>
+            
+          </div>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          <span class="post-nav-divider"></span>
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/19/两侧定宽中间自适应/" itemprop="url">
-              
-                <span itemprop="name">CSS布局——两侧定宽中间自适应</span>
-              
-            </a>
-        
-      </h2>
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-19T00:00:00+08:00"
-              content="2017-03-19" >
-          03-19
-        </time>
-      </div>
-
-    </header>
+      
+      
+    </footer>
   </article>
 
 
 
-    
-
+    <div class="post-spread">
       
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/19/水平垂直居中/" itemprop="url">
-              
-                <span itemprop="name">CSS布局——水平垂直居中</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-19T00:00:00+08:00"
-              content="2017-03-19" >
-          03-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-  </section>
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span>
-  </nav>
-
-
+    </div>
+  </div>
 
 
           </div>
@@ -356,6 +461,12 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
 
         </div>
         
@@ -375,8 +486,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://onlzci6oa.bkt.clouddn.com/17-5-6/33331647-file_1494037395631_a205.jpg"
@@ -438,6 +558,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Window属性"><span class="nav-number">1.</span> <span class="nav-text">Window属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Element属性"><span class="nav-number">2.</span> <span class="nav-text">Element属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mouseEvent属性"><span class="nav-number">3.</span> <span class="nav-text">mouseEvent属性</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -558,11 +694,9 @@
 
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
 
 
   
