@@ -90,18 +90,16 @@
 
 
 
-<meta name="description" content="js的学习中,原型与原形链是非常重要的部分,是实现对象继承和面向对象编程的基础">
+<meta name="description" content="将一个按顺序排列的数组乱序的几种方法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="原型与原型链">
-<meta property="og:url" content="https://whyang115.github.io/2017/04/09/原型与原型链/index.html">
+<meta property="og:title" content="数组随机排列">
+<meta property="og:url" content="https://whyang115.github.io/2017/06/02/数组随机排列/index.html">
 <meta property="og:site_name" content="whyang">
-<meta property="og:description" content="js的学习中,原型与原形链是非常重要的部分,是实现对象继承和面向对象编程的基础">
-<meta property="og:image" content="http://onlzci6oa.bkt.clouddn.com/17-4-9/52237926-file_1491720362859_1777a.png">
-<meta property="og:updated_time" content="2017-04-09T06:50:59.930Z">
+<meta property="og:description" content="将一个按顺序排列的数组乱序的几种方法">
+<meta property="og:updated_time" content="2017-06-03T06:57:02.541Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="原型与原型链">
-<meta name="twitter:description" content="js的学习中,原型与原形链是非常重要的部分,是实现对象继承和面向对象编程的基础">
-<meta name="twitter:image" content="http://onlzci6oa.bkt.clouddn.com/17-4-9/52237926-file_1491720362859_1777a.png">
+<meta name="twitter:title" content="数组随机排列">
+<meta name="twitter:description" content="将一个按顺序排列的数组乱序的几种方法">
 
 
 
@@ -129,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="https://whyang115.github.io/2017/04/09/原型与原型链/"/>
+  <link rel="canonical" href="https://whyang115.github.io/2017/06/02/数组随机排列/"/>
 
 
 
 
 
-  <title>原型与原型链 | whyang</title>
+  <title>数组随机排列 | whyang</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -264,7 +262,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://whyang115.github.io/2017/04/09/原型与原型链/">
+    <link itemprop="mainEntityOfPage" href="https://whyang115.github.io/2017/06/02/数组随机排列/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="whyang">
@@ -281,7 +279,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">原型与原型链</h1>
+          <h1 class="post-title" itemprop="name headline">数组随机排列</h1>
         
 
         <div class="post-meta">
@@ -293,8 +291,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-09T13:42:26+08:00">
-                2017-04-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-02T00:00:00+08:00">
+                2017-06-02
               </time>
             
 
@@ -334,7 +332,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/2017/04/09/原型与原型链/#comments" itemprop="discussionUrl">
+                <a class="cloud-tie-join-count" href="/2017/06/02/数组随机排列/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
@@ -360,10 +358,10 @@
       
 
       
-        <p>js的学习中,原型与原形链是非常重要的部分,是实现对象继承和面向对象编程的基础<br><a id="more"></a></p>
-<h2 id="原型-prototype"><a href="#原型-prototype" class="headerlink" title="原型(prototype)"></a>原型(prototype)</h2><p>原型每一个对象都拥有的属性,它是一个链接到其父对象的引用,他们相互链接形成一个链,向上直到null为止<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = &#123;&#125;</div><div class="line">a.constructor === <span class="built_in">Object</span> <span class="comment">//true</span></div><div class="line">a.__proto__ === <span class="built_in">Object</span>.prototype</div></pre></td></tr></table></figure></p>
-<p>prototype是只有函数才有的属性,当创建一个构造函数时,会自动创建一个prototype属性且为空,当用new去调用这个构造函数时就返回一个对象并将这个对象的原型指向构造函数的prototype属性,这个对象也有一个constructor属性指向构造函数<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">age</span>) </span>&#123;</div><div class="line">  <span class="keyword">this</span>.age = age;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person(<span class="number">20</span>);</div><div class="line"></div><div class="line">person.__proto__ === Person.prototype;<span class="comment">//true</span></div><div class="line">Person.prototype.isProtypeOf(person); <span class="comment">//true</span></div><div class="line">person.constructor === Person<span class="comment">//true</span></div><div class="line">Person.prototype.constructor === Person <span class="comment">//true</span></div></pre></td></tr></table></figure></p>
-<p>上述关系可以用一幅个人制作的丑图表示,网络上还有更为复杂全面的图。<br><img src="http://onlzci6oa.bkt.clouddn.com/17-4-9/52237926-file_1491720362859_1777a.png" alt=""></p>
+        <p>将一个按顺序排列的数组乱序的几种方法<br><a id="more"></a><br>一. 循环数组,随机取一个索引值,然后将当前循环的值和索引对应的值交换</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">shuffle</span>(<span class="params">arr</span>) </span>&#123;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</div><div class="line">    <span class="keyword">var</span> rand = <span class="built_in">parseInt</span>(<span class="built_in">Math</span>.random() * arr.length)</div><div class="line">    <span class="keyword">var</span> temp = arr[rand]</div><div class="line">    arr[rand] = arr[i]</div><div class="line">    arr[i] = temp</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> arr</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>二. 创建一个新数组,每次循环从原数组中随机抽取一个值放入新数组中,然后从原数组中删去这个值<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">shuffle</span>(<span class="params">arr</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> newArr = []</div><div class="line">  <span class="keyword">while</span>(arr.length &gt; <span class="number">0</span>) &#123;</div><div class="line">    <span class="keyword">var</span> randIndex = <span class="built_in">parseInt</span>(<span class="built_in">Math</span>.random() * arr.length)</div><div class="line">    newArr.push(arr[randIndex])</div><div class="line">    arr.splice(randIndex,<span class="number">1</span>)</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> newArr</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>三. 使用js原生排序API,传入一个回调函数,此回调函数随机返回大于0或小于0<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">shuffle</span>(<span class="params">arr</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> arr.sort(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.random() - <span class="number">0.5</span></div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -406,8 +404,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/06/this/" rel="next" title="this">
-                <i class="fa fa-chevron-left"></i> this
+              <a href="/2017/05/28/数组去重/" rel="next" title="数组去重">
+                <i class="fa fa-chevron-left"></i> 数组去重
               </a>
             
           </div>
@@ -415,10 +413,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/04/15/跨域/" rel="prev" title="跨域">
-                跨域 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -467,17 +461,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://onlzci6oa.bkt.clouddn.com/17-5-6/33331647-file_1494037395631_a205.jpg"
@@ -539,22 +524,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#原型-prototype"><span class="nav-number">1.</span> <span class="nav-text">原型(prototype)</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
