@@ -260,6 +260,131 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://whyang115.github.io/2017/09/26/fix_ip_error/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="whyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://onlzci6oa.bkt.clouddn.com/17-5-6/33331647-file_1494037395631_a205.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="whyang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/26/fix_ip_error/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-26T17:17:31+08:00">
+                2017-09-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="ip设置时遇到的问题"><a href="#ip设置时遇到的问题" class="headerlink" title="ip设置时遇到的问题"></a>ip设置时遇到的问题</h1><h2 id="有一段时间，在设置ip时一直报一个意外-如下图示"><a href="#有一段时间，在设置ip时一直报一个意外-如下图示" class="headerlink" title="有一段时间，在设置ip时一直报一个意外,如下图示"></a>有一段时间，在设置ip时一直报一个意外,如下图示</h2><p><img src="http://onlzci6oa.bkt.clouddn.com/17-9-25/41578429.jpg" alt="意外"></p>
+<h1 id="原因不详"><a href="#原因不详" class="headerlink" title="原因不详"></a>原因不详</h1><h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><h2 id="使用命令行手动设置ip地址及dns"><a href="#使用命令行手动设置ip地址及dns" class="headerlink" title="使用命令行手动设置ip地址及dns"></a>使用命令行手动设置ip地址及dns</h2> <figure class="highlight dos"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">netsh interface ip <span class="built_in">set</span> address "以太网" static (ip地址) (子网掩码) (默认网关)</div><div class="line">netsh interface ip <span class="built_in">set</span> dns "以太网" static (dns地址)</div><div class="line">netsh interface ip add dns "以太网" (备用dns地址)</div></pre></td></tr></table></figure>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li>需使用powershell管理员权限然后输入以上代码</li>
+<li>以太网 应替换为相应网络连接名字</li>
+</ol>
+<h1 id="需要频繁切换固定的ip"><a href="#需要频繁切换固定的ip" class="headerlink" title="需要频繁切换固定的ip"></a>需要频繁切换固定的ip</h1><h2 id="个人需要在公司和学校使用同一台电脑-所以可以使用类批处理文件来自动化这个过程"><a href="#个人需要在公司和学校使用同一台电脑-所以可以使用类批处理文件来自动化这个过程" class="headerlink" title="个人需要在公司和学校使用同一台电脑,所以可以使用类批处理文件来自动化这个过程"></a>个人需要在公司和学校使用同一台电脑,所以可以使用类批处理文件来自动化这个过程</h2><ol>
+<li><p>首先创建一个company.cmd文件然后编辑</p>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"> netsh interface ip <span class="built_in">set</span> address "以太网" static (ip地址) (子网掩码) (默认网关)</div><div class="line">netsh interface ip <span class="built_in">set</span> dns "以太网" static (dns地址)</div><div class="line">netsh interface ip add dns "以太网" (备用dns地址)</div><div class="line"><span class="built_in">pause</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>然后创建一个school.cmd文件编辑</p>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">netsh interface ip <span class="built_in">set</span> address name="以太网" source=dhcp</div><div class="line">netsh interface ip <span class="built_in">set</span> address name="以太网" source=dhcp</div><div class="line"><span class="built_in">pause</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="使用时根据情况点击执行即可"><a href="#使用时根据情况点击执行即可" class="headerlink" title="使用时根据情况点击执行即可"></a>使用时根据情况点击执行即可</h2>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://whyang115.github.io/2017/06/02/数组随机排列/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -803,144 +928,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://whyang115.github.io/2017/05/06/js宽高/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="whyang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://onlzci6oa.bkt.clouddn.com/17-5-6/33331647-file_1494037395631_a205.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="whyang">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/06/js宽高/" itemprop="url">js中宽高总结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-06T12:10:35+08:00">
-                2017-05-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/笔记总结/" itemprop="url" rel="index">
-                    <span itemprop="name">笔记总结</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>js学习中经常遇到关于宽高的问题,最后发现各种宽高其实都是<code>Window</code>、<code>Element</code>、<code>mouseEvent</code>三者的属性,总结一下以便不时查阅<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/05/06/js宽高/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -990,7 +977,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
